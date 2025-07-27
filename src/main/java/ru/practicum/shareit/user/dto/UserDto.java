@@ -1,5 +1,7 @@
-package ru.practicum.shareit.item.dto;
+package ru.practicum.shareit.user.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -8,16 +10,13 @@ import lombok.Data;
  * TODO Sprint add-controllers.
  */
 @Data
-public class ItemDto {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class UserDto {
     Long id;
     @NotBlank
-    @NotNull
     String name;
+    @Email
     @NotBlank
     @NotNull
-    String description;
-    @NotNull
-    Boolean available;
-    Long ownerId;
-    Long requestId;
+    String email;
 }
