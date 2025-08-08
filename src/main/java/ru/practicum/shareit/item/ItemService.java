@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.practicum.shareit.exception.NotFoundException;
 import ru.practicum.shareit.item.dto.ItemDto;
-import ru.practicum.shareit.user.UserService;
+import ru.practicum.shareit.user.UserStorage;
 
 import java.util.List;
 
@@ -15,10 +15,10 @@ import java.util.List;
 public class ItemService {
 
     private final ItemStorage itemStorage;
-    private final UserService userService;
+    private final UserStorage userStorage;
 
     public ItemDto createItem(ItemDto request) {
-        userService.getUserById(request.getOwnerId());
+        userStorage.getUserById(request.getOwnerId());
         Long itemId = itemStorage.createItem(ItemMapper.toItem(request));
         return ItemMapper.toItemDto(itemStorage.getItemById(itemId).get());
     }
