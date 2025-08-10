@@ -6,7 +6,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import ru.practicum.shareit.exception.*;
+import ru.practicum.shareit.exception.ConditionsNotMetException;
+import ru.practicum.shareit.exception.DuplicatedDataException;
+import ru.practicum.shareit.exception.NotFoundException;
+import ru.practicum.shareit.exception.ParameterNotValidException;
+import ru.practicum.shareit.exception.ValidationException;
 
 @Slf4j
 @RestControllerAdvice
