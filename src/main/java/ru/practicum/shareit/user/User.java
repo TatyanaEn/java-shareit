@@ -17,7 +17,7 @@ import lombok.ToString;
  * TODO Sprint add-controllers.
  */
 @Entity
-@Table(name = "users", schema = "public")
+@Table(name = "users")
 @Getter
 @Setter
 @ToString

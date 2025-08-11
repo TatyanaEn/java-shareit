@@ -21,7 +21,7 @@ import ru.practicum.shareit.user.User;
  * TODO Sprint add-controllers.
  */
 @Entity
-@Table(name = "items", schema = "public")
+@Table(name = "items")
 @Getter
 @Setter
 @ToString

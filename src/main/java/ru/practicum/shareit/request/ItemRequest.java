@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
  * TODO Sprint add-item-requests.
  */
 @Entity
-@Table(name = "requests", schema = "public")
+@Table(name = "requests")
 @Getter
 @Setter
 @ToString
