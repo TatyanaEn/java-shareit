@@ -34,10 +34,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto createUser(UserDto request) {
-        /*for (UserDto item : findAll()) {
-            if (item.getEmail().equals(request.getEmail()))
-                throw new DuplicatedDataException("Этот емейл уже используется", log);
-        }*/
         User user = UserMapper.toUser(request);
         return UserMapper.toUserDto(userRepository.save(user));
 
@@ -45,12 +41,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto updateUser(UserDto request) {
-        /*for (User item : userRepository.findAll()) {
-            if (item.getEmail().equals(request.getEmail()))
-                throw new DuplicatedDataException("Этот имейл уже используется", log);
-
-        }*/
-
         Long userId = request.getId();
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("Пользователь с ID '%d' не найден. ".formatted(userId), log));
