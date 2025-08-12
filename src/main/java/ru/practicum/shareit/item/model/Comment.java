@@ -14,37 +14,34 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import ru.practicum.shareit.request.ItemRequest;
+import org.hibernate.annotations.CreationTimestamp;
 import ru.practicum.shareit.user.User;
 
-/**
- * TODO Sprint add-controllers.
- */
+import java.time.LocalDateTime;
+
 @Entity
-@Table(name = "items")
+@Table(name = "comments")
 @Getter
 @Setter
 @ToString
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Item {
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "name", nullable = false)
-    private String name;
-    @Column(name = "description")
-    private String description;
-    @Column(name = "is_available")
-    private Boolean available;
+    @Column(name = "text", nullable = false)
+    private String text;
+    @ManyToOne
+    @JoinColumn(name = "item_id")
+    private Item item;
 
     @ManyToOne
-    @JoinColumn(name = "owner_id")
-    private User owner;
+    @JoinColumn(name = "author_id")
+    private User author;
 
-    @ManyToOne
-    @JoinColumn(name = "request_id")
-    private ItemRequest request;
-
+    @CreationTimestamp
+    @Column(name = "create_date", insertable = false, updatable = false)
+    private LocalDateTime createDate;
 }

@@ -1,53 +1,22 @@
 package ru.practicum.shareit.item;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-import ru.practicum.shareit.exception.NotFoundException;
+import ru.practicum.shareit.item.dto.CommentDto;
+import ru.practicum.shareit.item.dto.CommentResponseDto;
 import ru.practicum.shareit.item.dto.ItemDto;
-import ru.practicum.shareit.user.UserService;
+import ru.practicum.shareit.item.dto.ItemWithBookingDto;
 
 import java.util.List;
 
-@Slf4j
-@Service
-@RequiredArgsConstructor
-public class ItemService {
+public interface ItemService {
+    ItemDto createItem(ItemDto request);
 
-    private final ItemStorage itemStorage;
-    private final UserService userService;
+    ItemDto updateItem(Long userId, ItemDto request);
 
-    public ItemDto createItem(ItemDto request) {
-        userService.getUserById(request.getOwnerId());
-        Long itemId = itemStorage.createItem(ItemMapper.toItem(request));
-        return ItemMapper.toItemDto(itemStorage.getItemById(itemId).get());
-    }
+    ItemWithBookingDto getItemById(Long userId, Long itemId);
 
-    public ItemDto updateItem(Long userId, ItemDto request) {
+    List<ItemWithBookingDto> findAllItemsByOwner(Long userId);
 
-        if (!itemStorage.getItemById(request.getId()).get().getOwnerId().equals(userId)) {
-            throw new NotFoundException("Редактировать вещь может только её владелец", log);
-        }
+    List<ItemDto> findItems(String text);
 
-        Long itemId = itemStorage.updateItem(ItemMapper.toItem(request));
-        return ItemMapper.toItemDto(itemStorage.getItemById(itemId).get());
-    }
-
-    public ItemDto getItemById(Long itemId) {
-        return itemStorage.getItemById(itemId)
-                .map(ItemMapper::toItemDto)
-                .orElseThrow(() -> new NotFoundException("Вещь с id = " + itemId + " не найдена", log));
-    }
-
-    public List<ItemDto> findAllItemsByOwner(Long userId) {
-        return itemStorage.getAllItemsByOwner(userId).stream().map(ItemMapper::toItemDto).toList();
-    }
-
-    public List<ItemDto> findItems(String text) {
-        if (text.isBlank()) {
-            return List.of();
-        } else {
-            return itemStorage.findItems(text).stream().map(ItemMapper::toItemDto).toList();
-        }
-    }
+    CommentResponseDto createComment(CommentDto request);
 }

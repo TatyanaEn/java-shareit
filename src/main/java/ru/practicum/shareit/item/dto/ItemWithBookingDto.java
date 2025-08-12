@@ -2,31 +2,28 @@ package ru.practicum.shareit.item.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
+import ru.practicum.shareit.booking.Booking;
 import ru.practicum.shareit.user.dto.UserDto;
 
 import java.util.List;
 
-/**
- * TODO Sprint add-controllers.
- */
 @Data
-public class ItemDto {
+public class ItemWithBookingDto {
     Long id;
     @NotBlank
     @NotNull
-    @Size(max = 255)
     String name;
     @NotBlank
     @NotNull
-    @Size(max = 2000)
     String description;
     @NotNull
     Boolean available;
     UserDto owner;
-    //ItemRequestDto request;
+    Booking lastBooking;
+    Booking nextBooking;
     List<CommentDto> comments;
+    //ItemRequestDto request;
 
     public boolean hasName() {
         return !(name == null || name.isBlank());
