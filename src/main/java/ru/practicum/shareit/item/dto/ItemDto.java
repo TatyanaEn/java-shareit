@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import ru.practicum.shareit.request.dto.ItemRequestDto;
 import ru.practicum.shareit.user.dto.UserDto;
 
 import java.util.List;
@@ -25,8 +26,10 @@ public class ItemDto {
     @NotNull
     Boolean available;
     UserDto owner;
-    //ItemRequestDto request;
+
     List<CommentDto> comments;
+
+    Long requestId;
 
     public boolean hasName() {
         return !(name == null || name.isBlank());
@@ -43,5 +46,6 @@ public class ItemDto {
     public boolean hasOwner() {
         return !(owner == null);
     }
+
 
 }

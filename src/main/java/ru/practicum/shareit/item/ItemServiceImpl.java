@@ -12,6 +12,8 @@ import ru.practicum.shareit.item.dto.CommentResponseDto;
 import ru.practicum.shareit.item.dto.ItemDto;
 import ru.practicum.shareit.item.dto.ItemWithBookingDto;
 import ru.practicum.shareit.item.model.Item;
+import ru.practicum.shareit.request.ItemRequest;
+import ru.practicum.shareit.request.ItemRequestRepository;
 import ru.practicum.shareit.user.UserRepository;
 
 import java.time.LocalDateTime;
@@ -27,11 +29,17 @@ public class ItemServiceImpl implements ItemService {
     private final UserRepository userRepository;
     private final BookingRepository bookingRepository;
     private final CommentRepository commentRepository;
+    private final ItemRequestRepository itemRequestRepository;
 
     @Override
     public ItemDto createItem(ItemDto request) {
         userRepository.findById(request.getOwner().getId());
-        return ItemMapper.toItemDto(itemRepository.save(ItemMapper.toItem(request)));
+        ItemRequest itemRequest = null;
+        if (request.getRequestId() != null)
+            itemRequest = itemRequestRepository.findById(request.getRequestId()).get();
+        Item newItem = ItemMapper.toItem(request);
+        newItem.setRequest(itemRequest);
+        return ItemMapper.toItemDto( itemRepository.save(newItem));
     }
 
     @Override

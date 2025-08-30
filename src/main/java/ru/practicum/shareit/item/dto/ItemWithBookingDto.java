@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import ru.practicum.shareit.booking.Booking;
+import ru.practicum.shareit.request.dto.ItemRequestDto;
 import ru.practicum.shareit.user.dto.UserDto;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class ItemWithBookingDto {
     Booking lastBooking;
     Booking nextBooking;
     List<CommentDto> comments;
-    //ItemRequestDto request;
+    Long requestId;
 
     public boolean hasName() {
         return !(name == null || name.isBlank());

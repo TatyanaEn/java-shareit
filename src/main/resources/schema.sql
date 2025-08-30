@@ -49,3 +49,4 @@ CREATE TABLE IF NOT EXISTS comments (
   CONSTRAINT fk_comments_to_items FOREIGN KEY(item_id) REFERENCES items(id),
   CONSTRAINT fk_comments_to_users FOREIGN KEY(author_id) REFERENCES users(id)
 );
+

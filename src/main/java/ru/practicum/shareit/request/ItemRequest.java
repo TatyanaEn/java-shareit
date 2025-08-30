@@ -8,8 +8,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
@@ -26,6 +28,8 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ItemRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,6 +40,6 @@ public class ItemRequest {
     @JoinColumn(name = "requestor_id")
     private User requestor;
     @CreationTimestamp
-    @Column(name = "create_date")
-    private LocalDateTime created = LocalDateTime.now();
+    @Column(name = "create_date", insertable = false, updatable = false)
+    private LocalDateTime created;
 }
