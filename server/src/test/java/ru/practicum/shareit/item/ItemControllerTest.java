@@ -97,21 +97,6 @@ class ItemControllerTest {
         commentDto = CommentMapper.toCommentDto(comment);
         commentResponseDto = CommentMapper.toCommentResponseDto(comment);
 
-
-        /*commentDto = CommentDto.builder()
-                .id(1L)
-                .author(user)
-                .text("Don't work")
-                .item(itemDto3)
-                .build();
-
-        commentResponseDto = CommentResponseDto.builder()
-                .id(1L)
-                .authorName(user.getName())
-                .text("Don't work")
-                .build();*/
-
-
     }
 
     @Test
