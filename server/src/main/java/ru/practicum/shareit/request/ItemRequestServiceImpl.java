@@ -16,7 +16,7 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class ItemRequestServiceImpl implements ItemRequestService{
+public class ItemRequestServiceImpl implements ItemRequestService {
     private final ItemRequestRepository itemRequestRepository;
     private final UserRepository userRepository;
     private final ItemRepository itemRepository;
@@ -48,7 +48,9 @@ public class ItemRequestServiceImpl implements ItemRequestService{
 
     @Override
     public ItemRequestWithAnswerDto getItemRequestById(Long requestId) {
-        ItemRequestWithAnswerDto itemRequest = ItemRequestMapper.toItemRequestWithAnswerDto(itemRequestRepository.findById(requestId).get());
+        ItemRequestWithAnswerDto itemRequest = ItemRequestMapper.toItemRequestWithAnswerDto(itemRequestRepository.findById(requestId)
+                .orElseThrow(() -> new NotFoundException("Запрос с ID '%d' не найден. "
+                        .formatted(requestId), log)));
         itemRequest.setItems(itemRepository.findAllByRequestId(requestId));
         return itemRequest;
     }

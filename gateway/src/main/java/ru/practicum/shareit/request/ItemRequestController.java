@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import ru.practicum.shareit.request.dto.ItemRequestDto;
 
-import java.util.List;
-
 @Controller
 @RequestMapping(path = "/requests")
 @RequiredArgsConstructor

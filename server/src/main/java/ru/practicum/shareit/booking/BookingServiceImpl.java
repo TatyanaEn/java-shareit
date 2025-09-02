@@ -40,6 +40,11 @@ public class BookingServiceImpl implements BookingService {
             throw new ValidationException("Вещь id = '%d' не доступна для бронирования.".formatted(item.getId()), log);
         }
 
+        if (item.getOwner().getId().equals(booker.getId())) {
+            throw new NotFoundException("Нельзя бронировать свою вещь", log);
+        }
+
+
         Booking booking = BookingMapper.toBooking(request);
         booking.setBooker(booker);
         booking.setItem(item);
@@ -91,7 +96,7 @@ public class BookingServiceImpl implements BookingService {
                     Sort.by("start")).stream().map(BookingMapper::toBookingDto).toList();
             case "PAST" -> bookingRepository.findByBooker_IdAndEndIsBefore(userId, LocalDateTime.now(),
                     Sort.by("start")).stream().map(BookingMapper::toBookingDto).toList();
-            case "CURENT" -> bookingRepository.findByBooker_IdAndStartIsBeforeAndEndIsAfter(userId,
+            case "CURRENT" -> bookingRepository.findByBooker_IdAndStartIsBeforeAndEndIsAfter(userId,
                             LocalDateTime.now(), LocalDateTime.now(), Sort.by("start"))
                     .stream().map(BookingMapper::toBookingDto).toList();
             case "WAITING" -> bookingRepository.findByBooker_IdAndStatus(userId, "WAITING",
@@ -117,7 +122,7 @@ public class BookingServiceImpl implements BookingService {
                     .stream().map(BookingMapper::toBookingDto).toList();
             case "PAST" -> bookingRepository.findByOwnerAndEndDateBefore(ownerId, LocalDateTime.now())
                     .stream().map(BookingMapper::toBookingDto).toList();
-            case "CURENT" -> bookingRepository.findByOwnerAndStartIsBeforeAndEndIsAfter(ownerId,
+            case "CURRENT" -> bookingRepository.findByOwnerAndStartIsBeforeAndEndIsAfter(ownerId,
                             LocalDateTime.now(), LocalDateTime.now())
                     .stream().map(BookingMapper::toBookingDto).toList();
             case "WAITING" -> bookingRepository.findByOwnerAndStatus(ownerId, "WAITING")

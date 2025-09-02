@@ -3,7 +3,6 @@ package ru.practicum.shareit.request.dto;
 import lombok.Builder;
 import lombok.Data;
 import ru.practicum.shareit.item.model.Item;
-import ru.practicum.shareit.user.User;
 import ru.practicum.shareit.user.dto.UserDto;
 
 import java.time.LocalDateTime;
@@ -12,13 +11,13 @@ import java.util.List;
 @Data
 @Builder
 public class ItemRequestWithAnswerDto {
-        Long id;
+    Long id;
 
-        String description;
+    String description;
 
-        UserDto requestor;
+    UserDto requestor;
 
-        LocalDateTime created;
+    LocalDateTime created;
 
-        List<Item>  items;
+    List<Item> items;
 }

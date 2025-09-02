@@ -3,8 +3,8 @@ package ru.practicum.shareit.item.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Builder;
 import lombok.Data;
-import ru.practicum.shareit.request.dto.ItemRequestDto;
 import ru.practicum.shareit.user.dto.UserDto;
 
 import java.util.List;
@@ -13,6 +13,7 @@ import java.util.List;
  * TODO Sprint add-controllers.
  */
 @Data
+@Builder
 public class ItemDto {
     Long id;
     @NotBlank

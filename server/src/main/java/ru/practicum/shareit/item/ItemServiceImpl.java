@@ -40,7 +40,7 @@ public class ItemServiceImpl implements ItemService {
                     .orElseThrow(() -> new NotFoundException("Запрос с ID '%d' не найден".formatted(request.getRequestId()), log));
         Item newItem = ItemMapper.toItem(request);
         newItem.setRequest(itemRequest);
-        return ItemMapper.toItemDto( itemRepository.save(newItem));
+        return ItemMapper.toItemDto(itemRepository.save(newItem));
     }
 
     @Override

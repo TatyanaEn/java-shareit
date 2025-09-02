@@ -2,14 +2,15 @@ package ru.practicum.shareit.item.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Data;
 import ru.practicum.shareit.booking.Booking;
-import ru.practicum.shareit.request.dto.ItemRequestDto;
 import ru.practicum.shareit.user.dto.UserDto;
 
 import java.util.List;
 
 @Data
+@Builder
 public class ItemWithBookingDto {
     Long id;
     @NotBlank

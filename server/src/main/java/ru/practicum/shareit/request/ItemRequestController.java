@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import ru.practicum.shareit.booking.dto.BookingResponseDto;
 import ru.practicum.shareit.request.dto.ItemRequestDto;
 import ru.practicum.shareit.request.dto.ItemRequestWithAnswerDto;
 import ru.practicum.shareit.user.UserService;
@@ -32,7 +31,7 @@ public class ItemRequestController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ItemRequestDto createItemRequest(@RequestHeader("X-Sharer-User-Id") Long userId,
-                                         @Valid @RequestBody ItemRequestDto itemRequestDto) {
+                                            @Valid @RequestBody ItemRequestDto itemRequestDto) {
         itemRequestDto.setRequestor(userService.getUserById(userId));
         return itemRequestService.createItemRequest(itemRequestDto);
 
