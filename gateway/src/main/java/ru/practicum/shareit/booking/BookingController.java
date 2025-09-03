@@ -44,21 +44,21 @@ public class BookingController {
     }
 
     @GetMapping("/{bookingId}")
-    public ResponseEntity<Object> getBookingById(@RequestHeader("USER_ID_FIELD") Long userId,
+    public ResponseEntity<Object> getBookingById(@RequestHeader(USER_ID_FIELD) Long userId,
                                                  @PathVariable("bookingId") Long bookingId) {
         log.info("Get booking {}, userId={}", bookingId, userId);
         return bookingClient.getBookingById(userId, bookingId);
     }
 
     @GetMapping("/owner")
-    public ResponseEntity<Object> getBookingListByOwnerId(@RequestHeader("USER_ID_FIELD") Long userId) {
+    public ResponseEntity<Object> getBookingListByOwnerId(@RequestHeader(USER_ID_FIELD) Long userId) {
         log.info("Get booking  userId={}", userId);
         return bookingClient.getBookingListByOwnerId(userId);
     }
 
 
     @PostMapping
-    public ResponseEntity<Object> createBooking(@RequestHeader("USER_ID_FIELD") long userId,
+    public ResponseEntity<Object> createBooking(@RequestHeader(USER_ID_FIELD) long userId,
                                                 @RequestBody @Valid BookItemRequestDto requestDto) {
         log.info("Creating booking {}, userId={}", requestDto, userId);
         return bookingClient.createBooking(userId, requestDto);
@@ -67,7 +67,7 @@ public class BookingController {
 
     @PatchMapping("/{bookingId}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Object> acceptBooking(@RequestHeader("USER_ID_FIELD") Long userId,
+    public ResponseEntity<Object> acceptBooking(@RequestHeader(USER_ID_FIELD) Long userId,
                                                 @PathVariable("bookingId") Long bookingId,
                                                 @RequestParam Boolean approved) {
         log.info("Accept booking bookingId={}, userId={}, approved={}", bookingId, userId, approved);

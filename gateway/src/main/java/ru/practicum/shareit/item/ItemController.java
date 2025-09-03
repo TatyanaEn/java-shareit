@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.practicum.shareit.item.dto.CommentDto;
 import ru.practicum.shareit.item.dto.ItemDto;
 
+import static ru.practicum.shareit.constants.AppConstants.USER_ID_FIELD;
+
 @Controller
 @RequestMapping(path = "/items")
 @RequiredArgsConstructor
@@ -27,14 +29,14 @@ public class ItemController {
     public final ItemClient itemClient;
 
     @PostMapping
-    public ResponseEntity<Object> createItem(@RequestHeader("USER_ID_FIELD") Long userId,
+    public ResponseEntity<Object> createItem(@RequestHeader(USER_ID_FIELD) Long userId,
                                              @Valid @RequestBody ItemDto itemRequest) {
         log.info("Creating item {}, userId={}", itemRequest, userId);
         return itemClient.createItem(userId, itemRequest);
     }
 
     @PatchMapping("/{itemId}")
-    public ResponseEntity<Object> updateItem(@RequestHeader("USER_ID_FIELD") Long userId,
+    public ResponseEntity<Object> updateItem(@RequestHeader(USER_ID_FIELD) Long userId,
                                              @PathVariable("itemId") Long itemId,
                                              @RequestBody ItemDto itemRequest) {
         log.info("Update item {}, userId={}", itemRequest, userId);
@@ -42,14 +44,14 @@ public class ItemController {
     }
 
     @GetMapping("/{itemId}")
-    public ResponseEntity<Object> findById(@RequestHeader("USER_ID_FIELD") Long userId,
+    public ResponseEntity<Object> findById(@RequestHeader(USER_ID_FIELD) Long userId,
                                            @PathVariable("itemId") Long itemId) {
         log.info("Get item with id {}, userId={}", itemId, userId);
         return itemClient.getItemById(userId, itemId);
     }
 
     @GetMapping
-    public ResponseEntity<Object> findAllItemsByOwner(@RequestHeader("USER_ID_FIELD") Long userId) {
+    public ResponseEntity<Object> findAllItemsByOwner(@RequestHeader(USER_ID_FIELD) Long userId) {
         log.info("Get all items by owner_id {}", userId);
         return itemClient.findAllItemsByOwner(userId);
     }
@@ -61,7 +63,7 @@ public class ItemController {
     }
 
     @PostMapping("/{itemId}/comment")
-    public ResponseEntity<Object> createComment(@RequestHeader("USER_ID_FIELD") Long userId,
+    public ResponseEntity<Object> createComment(@RequestHeader(USER_ID_FIELD) Long userId,
                                                 @PathVariable("itemId") Long itemId,
                                                 @Valid @RequestBody CommentDto commentRequest) {
         log.info("create comment {} for item_id = {} by user_id = {}", commentRequest, itemId, userId);

@@ -17,6 +17,8 @@ import ru.practicum.shareit.user.UserService;
 
 import java.util.List;
 
+import static ru.practicum.shareit.constans.AppConstants.USER_ID_FIELD;
+
 @RestController
 @RequestMapping(path = "/requests")
 @RequiredArgsConstructor
@@ -27,7 +29,7 @@ public class ItemRequestController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ItemRequestDto createItemRequest(@RequestHeader("USER_ID_FIELD") Long userId,
+    public ItemRequestDto createItemRequest(@RequestHeader(USER_ID_FIELD) Long userId,
                                             @Valid @RequestBody ItemRequestDto itemRequestDto) {
         itemRequestDto.setRequestor(userService.getUserById(userId));
         return itemRequestService.createItemRequest(itemRequestDto);
@@ -36,14 +38,14 @@ public class ItemRequestController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<ItemRequestWithAnswerDto> getItemRequestListByUserId(@RequestHeader("USER_ID_FIELD") Long userId) {
+    public List<ItemRequestWithAnswerDto> getItemRequestListByUserId(@RequestHeader(USER_ID_FIELD) Long userId) {
 
         return itemRequestService.getItemRequestListByUserId(userId);
     }
 
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
-    public List<ItemRequestDto> getAllItemRequestList(@RequestHeader("USER_ID_FIELD") Long userId) {
+    public List<ItemRequestDto> getAllItemRequestList(@RequestHeader(USER_ID_FIELD) Long userId) {
         return itemRequestService.getAllItemRequestList(userId);
     }
 

@@ -12,6 +12,8 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 import java.util.Map;
 
+import static ru.practicum.shareit.constants.AppConstants.USER_ID_FIELD;
+
 public class BaseClient {
     protected final RestTemplate rest;
 
@@ -114,7 +116,7 @@ public class BaseClient {
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setAccept(List.of(MediaType.APPLICATION_JSON));
         if (userId != null) {
-            headers.set("USER_ID_FIELD", String.valueOf(userId));
+            headers.set(USER_ID_FIELD, String.valueOf(userId));
         }
         return headers;
     }

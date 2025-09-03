@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import ru.practicum.shareit.request.dto.ItemRequestDto;
 
+import static ru.practicum.shareit.constants.AppConstants.USER_ID_FIELD;
+
 @Controller
 @RequestMapping(path = "/requests")
 @RequiredArgsConstructor
@@ -27,19 +29,19 @@ public class ItemRequestController {
     private final ItemRequestClient itemRequestClient;
 
     @PostMapping
-    public ResponseEntity<Object> createItemRequest(@RequestHeader("USER_ID_FIELD") Long userId,
+    public ResponseEntity<Object> createItemRequest(@RequestHeader(USER_ID_FIELD) Long userId,
                                                     @Valid @RequestBody ItemRequestDto itemRequestDto) {
         return itemRequestClient.createItemRequest(userId, itemRequestDto);
 
     }
 
     @GetMapping
-    public ResponseEntity<Object> getItemRequestListByUserId(@RequestHeader("USER_ID_FIELD") Long userId) {
+    public ResponseEntity<Object> getItemRequestListByUserId(@RequestHeader(USER_ID_FIELD) Long userId) {
         return itemRequestClient.getItemRequestListByUserId(userId);
     }
 
     @GetMapping("/all")
-    public ResponseEntity<Object> getAllItemRequestList(@RequestHeader("USER_ID_FIELD") Long userId) {
+    public ResponseEntity<Object> getAllItemRequestList(@RequestHeader(USER_ID_FIELD) Long userId) {
         return itemRequestClient.getAllItemRequestList(userId);
     }
 
