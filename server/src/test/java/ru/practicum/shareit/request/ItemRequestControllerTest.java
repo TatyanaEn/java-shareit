@@ -119,7 +119,7 @@ class ItemRequestControllerTest {
                         .characterEncoding(StandardCharsets.UTF_8)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
-                        .header("X-Sharer-User-Id", 1))
+                        .header("USER_ID_FIELD", 1))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id", is(itemRequestDto.getId()), Long.class))
                 .andExpect(jsonPath("$.description", is(itemRequestDto.getDescription()), String.class));
@@ -135,9 +135,9 @@ class ItemRequestControllerTest {
                         .characterEncoding(StandardCharsets.UTF_8)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
-                        .header("X-Sharer-User-Id", 3))
+                        .header("USER_ID_FIELD", 3))
                 .andExpect(status().isOk())
-                .andExpect(content().json(mapper.writeValueAsString(List.of(itemRequestFullDto))));     //???
+                .andExpect(content().json(mapper.writeValueAsString(List.of(itemRequestFullDto))));
 
         verify(itemRequestService, times(1)).getItemRequestListByUserId(3L);
     }
@@ -150,7 +150,7 @@ class ItemRequestControllerTest {
                         .characterEncoding(StandardCharsets.UTF_8)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
-                        .header("X-Sharer-User-Id", 1))
+                        .header("USER_ID_FIELD", 1))
                 .andExpect(status().isOk())
                 .andExpect(content().json(mapper.writeValueAsString(List.of(itemRequestDto))));
 
@@ -166,7 +166,7 @@ class ItemRequestControllerTest {
                         .characterEncoding(StandardCharsets.UTF_8)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
-                        .header("X-Sharer-User-Id", 1))
+                        .header("USER_ID_FIELD", 1))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(itemRequestFullDto.getId()), Long.class))
                 .andExpect(jsonPath("$.description", is(itemRequestFullDto.getDescription()), String.class));

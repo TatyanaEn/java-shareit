@@ -1,19 +1,34 @@
 package ru.practicum.shareit.booking.dto;
 
 import java.util.Optional;
+/**
+ * Перечисление, представляющее статусы бронирования
+ */
 
 public enum BookingState {
-    // Все
+    /**
+     * Все
+     */
     ALL,
-    // Текущие
+    /**
+     * Текущие
+     */
     CURRENT,
-    // Будущие
+    /**
+     * Будущие
+     */
     FUTURE,
-    // Завершенные
+    /**
+     * Завершенные
+     */
     PAST,
-    // Отклоненные
+    /**
+     * Отклоненные
+     */
     REJECTED,
-    // Ожидающие подтверждения
+    /**
+     * Ожидающие подтверждения
+     */
     WAITING;
 
     public static Optional<BookingState> from(String stringState) {

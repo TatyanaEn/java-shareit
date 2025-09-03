@@ -272,8 +272,6 @@ public class ItemServiceImplTest {
         when(userRepository.existsById(anyLong())).thenReturn(true);
         when(itemRepository.findAllByOwnerId(anyLong())).thenReturn(new ArrayList<>(List.of(item)));
         when(commentRepository.findAllByItemId(anyLong())).thenReturn(List.of(comment));
-        //when(bookingRepository.findLastBookingsForItems(eq(List.of(1)), any(LocalDateTime.class), eq(BookingStatus.APPROVED))).thenReturn(List.of(lastBooking));
-        //when(bookingRepository.findNextBookingsForItems(eq(List.of(1)), any(LocalDateTime.class), eq(BookingStatus.APPROVED))).thenReturn(List.of(nextBooking));
         ItemWithBookingDto itemDtoTest = new ArrayList<>(itemService.findAllItemsByOwner(user.getId())).get(0);
 
         assertEquals(itemDtoTest.getId(), item.getId());

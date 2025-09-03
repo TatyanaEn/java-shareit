@@ -19,7 +19,5 @@ public class ItemDto {
     @NotNull
     Boolean available;
 
-    //List<CommentDto> comments;
-
     Long requestId;
 }

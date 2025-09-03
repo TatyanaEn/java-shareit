@@ -17,8 +17,6 @@ public class BookingMapper {
     public static Booking toBooking(BookingRequestDto bookingRequestDto) {
         return Booking.builder()
                 .id(bookingRequestDto.getId())
-                //.booker(UserMapper.toUser(bookingDto.getBooker()))
-                //.item(ItemMapper.toItem(bookingDto.getItem()))
                 .start(LocalDateTime.parse(bookingRequestDto.getStart(), dateTimeFormatter))
                 .end(LocalDateTime.parse(bookingRequestDto.getEnd(), dateTimeFormatter))
                 .status(bookingRequestDto.getStatus())

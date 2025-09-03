@@ -4,9 +4,6 @@ import lombok.Builder;
 import lombok.Data;
 import ru.practicum.shareit.booking.BookingStatus;
 
-/**
- * TODO Sprint add-bookings.
- */
 @Data
 @Builder
 public class BookingRequestDto {

@@ -128,7 +128,7 @@ class BookingControllerTest {
                         .characterEncoding(StandardCharsets.UTF_8)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
-                        .header("X-Sharer-User-Id", 3))
+                        .header("USER_ID_FIELD", 3))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id", is(bookingDto.getId()), Long.class))
                 .andExpect(jsonPath("$.status", is(bookingDto.getStatus().toString()), BookingStatus.class))
@@ -147,7 +147,7 @@ class BookingControllerTest {
                         .characterEncoding(StandardCharsets.UTF_8)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
-                        .header("X-Sharer-User-Id", 1))
+                        .header("USER_ID_FIELD", 1))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(bookingDto.getId()), Long.class))
                 .andExpect(jsonPath("$.status", is(bookingDto.getStatus().toString()), BookingStatus.class))
@@ -169,7 +169,7 @@ class BookingControllerTest {
                         .param("state", "ALL")
                         .param("from", String.valueOf(0))
                         .param("size", String.valueOf(5))
-                        .header("X-Sharer-User-Id", 1))
+                        .header("USER_ID_FIELD", 1))
                 .andExpect(status().isOk())
                 .andExpect(content().json(mapper.writeValueAsString(List.of(booking1, booking2))));
 
@@ -188,7 +188,7 @@ class BookingControllerTest {
                         .param("state", "ALL")
                         .param("from", String.valueOf(0))
                         .param("size", String.valueOf(5))
-                        .header("X-Sharer-User-Id", 1))
+                        .header("USER_ID_FIELD", 1))
                 .andExpect(status().isOk())
                 .andExpect(content().json(mapper.writeValueAsString(List.of(booking1, booking2))));
 

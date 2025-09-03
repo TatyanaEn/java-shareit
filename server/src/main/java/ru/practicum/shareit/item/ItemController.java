@@ -21,9 +21,6 @@ import ru.practicum.shareit.user.UserService;
 
 import java.util.List;
 
-/**
- * TODO Sprint add-controllers.
- */
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/items")
@@ -34,7 +31,7 @@ public class ItemController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ItemDto createItem(@RequestHeader("X-Sharer-User-Id") Long userId,
+    public ItemDto createItem(@RequestHeader("USER_ID_FIELD") Long userId,
                               @Valid @RequestBody ItemDto itemRequest) {
         itemRequest.setOwner(userService.getUserById(userId));
         return itemService.createItem(itemRequest);
@@ -42,7 +39,7 @@ public class ItemController {
 
     @PatchMapping("/{itemId}")
     @ResponseStatus(HttpStatus.OK)
-    public ItemDto updateItem(@RequestHeader("X-Sharer-User-Id") Long userId,
+    public ItemDto updateItem(@RequestHeader("USER_ID_FIELD") Long userId,
                               @PathVariable("itemId") Long itemId,
                               @RequestBody ItemDto itemRequest) {
         itemRequest.setId(itemId);
@@ -50,14 +47,14 @@ public class ItemController {
     }
 
     @GetMapping("/{itemId}")
-    public ItemWithBookingDto findById(@RequestHeader("X-Sharer-User-Id") Long userId,
+    public ItemWithBookingDto findById(@RequestHeader("USER_ID_FIELD") Long userId,
                                        @PathVariable("itemId") Long itemId) {
         return itemService.getItemById(userId, itemId);
     }
 
 
     @GetMapping
-    public List<ItemWithBookingDto> findAllItemsByOwner(@RequestHeader("X-Sharer-User-Id") Long userId) {
+    public List<ItemWithBookingDto> findAllItemsByOwner(@RequestHeader("USER_ID_FIELD") Long userId) {
         return itemService.findAllItemsByOwner(userId);
     }
 
@@ -68,7 +65,7 @@ public class ItemController {
 
     @PostMapping("/{itemId}/comment")
     @ResponseStatus(HttpStatus.CREATED)
-    public CommentResponseDto createComment(@RequestHeader("X-Sharer-User-Id") Long userId,
+    public CommentResponseDto createComment(@RequestHeader("USER_ID_FIELD") Long userId,
                                             @PathVariable("itemId") Long itemId,
                                             @Valid @RequestBody CommentDto commentRequest) {
         commentRequest.setItem(itemService.getItemById(userId, itemId));
